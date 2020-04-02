@@ -7,7 +7,7 @@ import com.ps.demo.UserDataService
 import groovy.transform.CompileStatic
 
 import grails.gorm.transactions.Transactional
-import org.springframework.context.HierarchicalMessageSource
+import org.springframework.context.MessageSource
 
 @SuppressWarnings('LineLength')
 @CompileStatic
@@ -23,7 +23,7 @@ class UserController {
 
     UserDataService userDataService
 
-    HierarchicalMessageSource messageSource
+    MessageSource messageSource
 
     CrudMessageService crudMessageService
 
@@ -38,8 +38,8 @@ class UserController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [
-                hotelList: userDataService.list(params),
-                hotelCount: userDataService.count(),
+                userList: userDataService.list(params),
+                userCount: userDataService.count(),
         ]
     }
 
@@ -64,6 +64,62 @@ class UserController {
             return
         }
         [user: user]
+    }
+
+    def save(NameCommand cmd) {
+        if (cmd == null) {
+            notFound()
+            return
+        }
+
+        if (cmd.hasErrors()) {
+            respond cmd.errors, model: [user: cmd], view:'create'
+            return
+        }
+
+        User user = userDataService.save(cmd.name)
+
+        if ( user == null ) {
+            notFound()
+            return
+        }
+
+        if ( user.hasErrors() ) {
+            respond user.errors, model: [user: user], view:'create'
+            return
+        }
+
+        Locale locale = request.locale
+        flash.message = crudMessageService.message(CRUD.CREATE, domainName(locale), user.id, locale)
+        redirect user
+    }
+
+    def update(NameUpdateCommand cmd) {
+        if (cmd == null) {
+            notFound()
+            return
+        }
+
+        if (cmd.hasErrors()) {
+            respond cmd.errors, model: [user: cmd], view: 'edit'
+            return
+        }
+
+        User user = userDataService.update(cmd.id, cmd.version, cmd.name)
+
+        if ( user == null) {
+            notFound()
+            return
+        }
+
+        if ( user.hasErrors() ) {
+            respond user.errors, model: [user: user], view: 'edit'
+            return
+        }
+
+        Locale locale = request.locale
+        flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale)
+        redirect user
     }
 
     def delete(Long id) {

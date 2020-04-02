@@ -54,7 +54,7 @@
         <h1>Welcome to Grails</h1>
 
         <p>
-            A powerful Groovy-based web application framework for the JVM built on top of Spring Boot
+            A powerful Groovy-based web application framework for the JVM built on top of Spring Boot <br>
         </p>
 
         <div id="controllers" role="navigation">
