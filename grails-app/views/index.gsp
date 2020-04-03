@@ -62,7 +62,7 @@
 
                 <g:each var="c" in="${grailsApplication.controllerClasses.find { it.fullName == "prueba.groovy.UserController" } }">
                     <li class="controller">
-                        <g:link controller="${c.logicalPropertyName}">Entrar a la App</g:link>
+                        <p><g:link controller="${c.logicalPropertyName}">Entrar a la App</g:link></p>
                     </li>
                 </g:each>
             </ul>

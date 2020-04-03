@@ -66,7 +66,7 @@ class UserController {
         [user: user]
     }
 
-    def save(NameCommand cmd) {
+    def save(UserCreateCommand cmd) {
         if (cmd == null) {
             notFound()
             return
@@ -77,7 +77,7 @@ class UserController {
             return
         }
 
-        User user = userDataService.save(cmd.name)
+        User user = userDataService.save(new User(cmd.id, cmd.name, cmd.document))
 
         if ( user == null ) {
             notFound()
@@ -94,7 +94,7 @@ class UserController {
         redirect user
     }
 
-    def update(NameUpdateCommand cmd) {
+    def update(UserUpdateCommand cmd) {
         if (cmd == null) {
             notFound()
             return
@@ -105,7 +105,7 @@ class UserController {
             return
         }
 
-        User user = userDataService.update(cmd.id, cmd.version, cmd.name)
+        User user = userDataService.update(cmd.id, cmd.version, cmd.name, cmd.document)
 
         if ( user == null) {
             notFound()

@@ -3,10 +3,6 @@ package com.ps.demo
 import grails.persistence.Entity
 import org.grails.datastore.gorm.GormEntity
 
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-
 @Entity
 class User implements GormEntity<User> {
 
@@ -19,10 +15,14 @@ class User implements GormEntity<User> {
         document nullable: false
     }
 
-    static mapping = {
-        id column:  'id_usuario'
-        name column: 'nombre'
-        document column: 'documento'
+    User(Long id, String name, Integer document) {
+        this.id = id
+        this.name = name
+        this.document = document
     }
 
+    User(String name, Integer document) {
+        this.name = name
+        this.document = document
+    }
 }
