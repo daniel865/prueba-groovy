@@ -6,6 +6,7 @@ import grails.gorm.services.Service
 interface UserDataService {
 
     User get(Long id)
+    User get(String name, Integer document)
     List<User> list(Map args)
     Number count()
     void delete(Serializable id)

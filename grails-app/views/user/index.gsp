@@ -18,7 +18,9 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <f:table collection="${userList}" properties="['name']"/>
+    <f:table collection="${userList}" properties="['id','name','document']">
+        <li><g:link class="create" action="create"><g:message code="default.button.login.label" args="[entityName]" /></g:link></li>
+    </f:table>
     <div class="pagination">
         <g:paginate total="${userCount ?: 0}" />
     </div>

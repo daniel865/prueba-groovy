@@ -54,7 +54,7 @@
         <h1>Welcome to Grails</h1>
 
         <p>
-            A powerful Groovy-based web application framework for the JVM built on top of Spring Boot <br>
+            A powerful Groovy-based web application framework for the JVM built on top of Spring Boot<br>
         </p>
 
         <div id="controllers" role="navigation">
@@ -62,7 +62,7 @@
 
                 <g:each var="c" in="${grailsApplication.controllerClasses.find { it.fullName == "prueba.groovy.UserController" } }">
                     <li class="controller">
-                        <p><g:link controller="${c.logicalPropertyName}">Entrar a la App</g:link></p>
+                        <p><br/><g:link controller="${c.logicalPropertyName}">Entrar a la App</g:link></p>
                     </li>
                 </g:each>
             </ul>

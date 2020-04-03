@@ -19,6 +19,7 @@ class UserController {
             update: 'PUT',
             show: 'GET',
             delete: 'DELETE',
+            get: 'GET'
     ]
 
     UserDataService userDataService
